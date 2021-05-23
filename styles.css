@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Neue Haas Grotesk", Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+#cloud {
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+#logoWrapper {
+  background-color: transparent;
+  width: 200px;
+  position: fixed;
+  z-index: 1000;
+  left: 12px;
+  top: 12px;
+}
+#logoWrapper img {
+  max-width: 100%;
+}
+
+#inputWrapper {
+  position: fixed;
+  bottom: 12px;
+  width: 90vw;
+  left: 5vw;
+  z-index: 1000;
+}
+#inputWrapper input {
+  width: 100%;
+  padding: 6px;
+  text-align: center;
+  outline: none;
+  border: 0;
+  height: 3em;
+}
+#inputWrapper #btn-submit {
+  background-color: black;
+  color: white;
+  width: 100%;
+  margin-top: 12px;
+  padding: 6px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.1s all ease-in-out;
+}
+#inputWrapper #btn-submit:hover {
+  cursor: pointer;
+  background-color: #1e1e1e;
+}
+
+@media screen and (min-width: 1200px) {
+  #inputWrapper {
+    width: 50vw;
+    left: 25vw;
+  }
+}
+.sinWrapper {
+  width: 500px;
+  padding: 12px;
+  transition: 2s all;
+  position: absolute;
+  opacity: 0;
+  animation: appear 2s forwards;
+}
+.sinWrapper .sinText {
+  display: block;
+  text-align: center;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
