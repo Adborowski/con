@@ -24,7 +24,6 @@ function getSinsArrayFromDatabase(){
 function renderSinsFromArray(sins){
 
     sins.forEach(function(element){
-
         addSinToCloud(element.sin);
     });
 
@@ -37,8 +36,15 @@ function addSinToCloud(text){
 
     // initial position randomizer, later it gets taken over
     // the 0.6 modifier is so that the items wouldn't be thrown too far
-    var randomX = Math.random()*cloudWidth*0.6+("px");
-    var randomY = Math.random()*cloudHeight*0.6+("px");
+
+    var modifier = 0.6; // modifier to keep the sins in the frame - 0.6 is good for desktop, but lower is better for mobile
+
+    if (cloudWidth < 500){
+        modifier = 0.1;
+        console.log("You're on mobile.")
+    }
+    var randomX = Math.random()*cloudWidth*modifier+("px"); // modifier is 0.6 for desktop, 0.1 for mobile
+    var randomY = Math.random()*cloudHeight*0.6+("px"); // 0.6 is universally good for Y
   
     $('#cloud').append(`
       <div class="sinWrapper" style="left: ${randomX}; top: ${randomY}"">
@@ -100,8 +106,20 @@ $("#txtNewSin").on("keyup", function(e){
     }
 });
 
+// enter admin mode by clicking on logo
+$("#logoWrapper").on("click", function(){
+    window.location.href = "admin.html";
+})
+
+// return to main screen from admin (back button)
+$(".btn-back").on("click", function(){
+    window.location.href = "./";
+
+})
+
 // rendering items in the admin panel
 function renderAdminPanel(sins){
+    $(".adminItem").remove();
     console.log("rendering Admin Panel", sins);
     sins.forEach(function(e){
         console.log(e);
@@ -114,16 +132,26 @@ function renderAdminPanel(sins){
             </div>
         
         `);
-        
-        // power the newly created button
-        $(".btn-delete").on("click", function(e){
-            deleteSin(parseInt(e.target.dataset.id));
-        })
-        
-    })
-}
+    }) // end of forEach
+
+    // power the newly created buttons
+    $(".btn-delete").on("click", function(e){
+        deleteSin(parseInt(e.target.dataset.id));
+    });
+
+} // end of function
 
 
 function deleteSin(sinId){
-
+    console.log(sinId);
+    parsedId = parseInt(sinId);
+    $.ajax({
+        url: "api-delete-sin.php",
+        type: "post",
+        data: {"sinId":parsedId},
+    }).done(function(jData){
+        console.log(jData);
+        console.log(JSON.parse(jData));
+        getSinsArrayFromDatabase();
+    }); // end of .done
 }
