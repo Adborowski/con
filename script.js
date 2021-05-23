@@ -14,6 +14,7 @@ function getSinsArrayFromDatabase(){
        var sins = parsedData;
        console.log("Fetched sins from database:", parsedData);
        renderSinsFromArray(sins);
+       renderAdminPanel(sins);
        
    }); // end of .done
 }
@@ -91,8 +92,7 @@ function submitNewSin(){
 
 } // end of .on
 
-// confirmation with ENTER
-
+// submitting with ENTER
 $("#txtNewSin").on("keyup", function(e){
     if (e.keyCode === 13){
         console.log("enter pressed");
@@ -100,4 +100,30 @@ $("#txtNewSin").on("keyup", function(e){
     }
 });
 
+// rendering items in the admin panel
+function renderAdminPanel(sins){
+    console.log("rendering Admin Panel", sins);
+    sins.forEach(function(e){
+        console.log(e);
+        $("#adminPanel").append(`
 
+            <div class="adminItem">
+                <div class="id"> ${e.id} </div>
+                <div class="content"> ${e.sin} </div>
+                <div class="btn-delete" data-id="${e.id}"> delete </div>
+            </div>
+        
+        `);
+        
+        // power the newly created button
+        $(".btn-delete").on("click", function(e){
+            deleteSin(parseInt(e.target.dataset.id));
+        })
+        
+    })
+}
+
+
+function deleteSin(sinId){
+
+}

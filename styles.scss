@@ -103,3 +103,30 @@
         opacity: 1;
     }
   }
+
+  #adminPanel{
+        max-width: 800px;
+        padding: 12px;
+
+        .adminItem{
+            display: grid;
+            grid-template-columns: 50px 1fr 100px;
+            margin-bottom: 6px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+
+            &:hover{
+                background-color: lightgray;
+            }
+
+            .btn-delete{
+                color: red;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+
+        h1{
+            margin-bottom: 12px;
+        }
+  }
