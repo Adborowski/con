@@ -7,21 +7,21 @@
 }
 
 #cloud {
-  background-color: white;
+  background-color: transparent;
   width: 100vw;
   height: 100vh;
   position: fixed;
+  z-index: 1000;
   left: 0;
   top: 0;
 }
 
 #logoWrapper {
   background-color: transparent;
-  width: 200px;
+  width: 400px;
   position: fixed;
-  z-index: 1000;
+  z-index: 900;
   left: 12px;
-  top: 12px;
 }
 #logoWrapper img {
   max-width: 100%;
@@ -32,7 +32,9 @@
   bottom: 12px;
   width: 90vw;
   left: 5vw;
-  z-index: 1000;
+  z-index: 1100;
+  display: grid;
+  grid-template-columns: 1fr 100px;
 }
 #inputWrapper input {
   width: 100%;
@@ -40,17 +42,21 @@
   text-align: center;
   outline: none;
   border: 0;
-  height: 3em;
+  background-color: #fafafa;
 }
 #inputWrapper #btn-submit {
   background-color: black;
   color: white;
-  width: 100%;
-  margin-top: 12px;
+  height: 100%;
   padding: 6px;
-  border-radius: 12px;
   text-align: center;
   transition: 0.1s all ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#inputWrapper #btn-submit #textline-submit {
+  display: block;
 }
 #inputWrapper #btn-submit:hover {
   cursor: pointer;

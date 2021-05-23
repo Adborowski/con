@@ -54,13 +54,15 @@ function randomizeNegativity(){ // I use this so my position randomizer gets a n
     if (token > 0.5){return 1} else {return -1};
 }
 
-var swingModifier = 0.2; // 0 - no movement, 1 - huge swinging movements, elements falling out of the frame
+var swingModifier = 0.3; // 0 - no movement, 1 - huge swinging movements, elements falling out of the frame
+var moveDuration = 3; // 3 - very slow relaxed movement, too slow for W
+var moveDelay = 0 // this makes the movement fluid - 1 is good
 
 function randomizePositionsOfSins(){
     $.each(sinWrappers, function(){
         var randomX = Math.random()*randomizeNegativity()*cloudWidth*swingModifier+("px");
         var randomY = Math.random()*randomizeNegativity()*cloudHeight*swingModifier+("px");
-        gsap.to(this, {x: randomX, y: randomY, delay: 1, duration: 3});
+        gsap.to(this, {x: randomX, y: randomY, delay: moveDelay, duration: moveDuration});
     })
 };
 window.setInterval(randomizePositionsOfSins, 3000); // subsequent calls every 3000 milliseconds
@@ -84,10 +86,18 @@ function submitNewSin(){
         console.log(parsedData);
         addSinToCloud(newSinContent); // immediately after adding the frontend display is fake, on refresh it gets taken from DB
         sinWrappers = $(".sinWrapper"); // make sure the new sin is in the array
-
+        $("#txtNewSin").val(""); // clear input
     });
 
 } // end of .on
 
+// confirmation with ENTER
+
+$("#txtNewSin").on("keyup", function(e){
+    if (e.keyCode === 13){
+        console.log("enter pressed");
+        submitNewSin();
+    }
+});
 
 
